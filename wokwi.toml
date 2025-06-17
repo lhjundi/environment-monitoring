@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+firmware = "build/environment-monitoring.uf2"
+elf = "build/environment-monitoring.elf"
