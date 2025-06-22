@@ -35,7 +35,7 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(environment-monitoring environment-monitoring.c )
+add_executable(environment-monitoring environment-monitoring.c dht22.c)
 
 pico_set_program_name(environment-monitoring "environment-monitoring")
 pico_set_program_version(environment-monitoring "0.1")
@@ -47,7 +47,8 @@ pico_enable_stdio_usb(environment-monitoring 1)
 # Add the standard library to the build
 target_link_libraries(environment-monitoring
         pico_stdlib
-        hardware_adc)
+        hardware_adc
+        hardware_pwm)
 
 # Add the standard include files to the build
 target_include_directories(environment-monitoring PRIVATE

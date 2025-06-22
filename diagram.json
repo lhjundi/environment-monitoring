@@ -6,55 +6,92 @@
     {
       "type": "board-pi-pico-w",
       "id": "pico",
-      "top": -204.85,
-      "left": -332.45,
+      "top": -12.85,
+      "left": 89.95,
       "attrs": { "builder": "pico-sdk" }
     },
     {
-      "type": "wokwi-dht22",
-      "id": "dht1",
-      "top": -198.6,
-      "left": -48.9,
-      "rotate": 90,
-      "attrs": { "temperature": "73.8", "humidity": "92" }
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -147.6,
+      "left": 263.4,
+      "attrs": { "color": "red", "flip": "1" }
     },
-    {
-      "type": "wokwi-resistor",
-      "id": "r1",
-      "top": -149.35,
-      "left": -203,
-      "rotate": 180,
-      "attrs": { "value": "10000" }
-    },
-    { "type": "wokwi-junction", "id": "j1", "top": -148.8, "left": -139.2, "attrs": {} },
-    { "type": "wokwi-junction", "id": "j2", "top": -158.4, "left": -216, "attrs": {} },
     {
       "type": "wokwi-photoresistor-sensor",
       "id": "ldr1",
-      "top": -345.9,
-      "left": -322.3,
-      "rotate": 90,
+      "top": 41.6,
+      "left": -229.6,
       "attrs": {}
     },
-    { "type": "wokwi-gas-sensor", "id": "gas1", "top": 41.1, "left": -348.2, "attrs": {} }
+    { "type": "wokwi-gas-sensor", "id": "gas1", "top": 175.5, "left": -194.6, "attrs": {} },
+    { "type": "wokwi-servo", "id": "servo1", "top": -21.2, "left": 307.2, "attrs": {} },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -110.4,
+      "left": -171.3,
+      "rotate": 270,
+      "attrs": { "temperature": "46.9" }
+    },
+    { "type": "wokwi-relay-module", "id": "relay1", "top": 134.6, "left": 297.6, "attrs": {} },
+    { "type": "wokwi-junction", "id": "j1", "top": 62.4, "left": -4.8, "attrs": {} },
+    { "type": "wokwi-junction", "id": "j2", "top": 52.8, "left": -33.6, "attrs": {} },
+    { "type": "wokwi-junction", "id": "j3", "top": 33.6, "left": 206.4, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -52.8,
+      "left": 258.65,
+      "rotate": 90,
+      "attrs": { "value": "330" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": 152.8,
+      "left": 467.4,
+      "rotate": 90,
+      "attrs": { "color": "green", "flip": "1" }
+    },
+    { "type": "wokwi-junction", "id": "j4", "top": 158.4, "left": 225.6, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 224.75,
+      "left": 345.6,
+      "attrs": { "value": "330" }
+    }
   ],
   "connections": [
     [ "pico:GP0", "$serialMonitor:RX", "", [] ],
     [ "pico:GP1", "$serialMonitor:TX", "", [] ],
-    [ "dht1:SDA", "j1:J", "yellow", [ "h-57.6", "v38.5" ] ],
-    [ "j1:J", "pico:GP4", "yellow", [ "v153.6", "h-211.2", "v-153.6" ] ],
-    [ "r1:1", "j1:J", "yellow", [ "v0", "h-19.2" ] ],
-    [ "pico:3V3", "j2:J", "red", [ "v0" ] ],
+    [ "ldr1:AO", "pico:GP26", "green", [ "h115.2", "v133.7", "h134.4", "v-76.8" ] ],
+    [ "gas1:AOUT", "pico:GP27", "green", [ "h105.6", "v38.4", "h134.4", "v-153.6" ] ],
+    [ "servo1:GND", "pico:GND.7", "black", [ "h-48", "v19.2" ] ],
+    [ "pico:GP3", "servo1:PWM", "green", [ "h-19.2", "v-57.6", "h172.8", "v86.4" ] ],
+    [ "pico:GP4", "led1:A", "green", [ "h-38.4", "v-96", "h240" ] ],
+    [ "pico:GP5", "relay1:IN", "green", [ "h-19.2", "v153.6", "h211.2" ] ],
+    [ "pico:GND.2", "j1:J", "black", [ "h0" ] ],
+    [ "j1:J", "ldr1:GND", "black", [ "v0" ] ],
+    [ "dht1:GND", "j1:J", "black", [ "h0" ] ],
+    [ "gas1:GND", "j1:J", "black", [ "h57.6", "v-144.8" ] ],
     [ "j2:J", "dht1:VCC", "red", [ "v0" ] ],
-    [ "j2:J", "r1:2", "red", [ "v-124.8", "h345.6", "v172.8" ] ],
-    [ "dht1:GND", "pico:GND.1", "black", [ "h-48", "v153.6", "h-230.4", "v-9.6" ] ],
-    [ "ldr1:VCC", "j2:J", "red", [ "v0" ] ],
-    [ "j3:J", "ldr1:GND", "", [ "v0" ] ],
-    [ "ldr1:GND", "pico:GND.8", "black", [ "v0" ] ],
-    [ "ldr1:AO", "pico:GP26", "green", [ "v0" ] ],
-    [ "pico:GP27", "gas1:AOUT", "green", [ "h57.91", "v172.8" ] ],
-    [ "gas1:GND", "pico:GND.4", "black", [ "h48", "v47.2", "h-220.8", "v-153.6" ] ],
-    [ "gas1:VCC", "j2:J", "red", [ "h268.8", "v-279.3", "h-268.8" ] ]
+    [ "ldr1:VCC", "j2:J", "red", [ "h28.8", "v-9.6" ] ],
+    [ "j2:J", "gas1:VCC", "red", [ "v0" ] ],
+    [ "pico:3V3", "j3:J", "red", [ "h0" ] ],
+    [ "relay1:VCC", "j3:J", "red", [ "h0" ] ],
+    [ "j2:J", "j3:J", "red", [ "v0", "h76.8", "v-86.4", "h153.6" ] ],
+    [ "dht1:SDA", "pico:GP2", "green", [ "h67.2", "v86.3" ] ],
+    [ "led1:C", "r1:1", "green", [ "v0" ] ],
+    [ "pico:GND.8", "r1:2", "black", [ "h0" ] ],
+    [ "servo1:V+", "pico:VBUS", "red", [ "h-67.2", "v-38.3" ] ],
+    [ "relay1:COM", "j3:J", "red", [ "h30", "v-59", "h-211.2", "v-67.2" ] ],
+    [ "led2:A", "relay1:NO", "green", [ "h0" ] ],
+    [ "relay1:GND", "j4:J", "black", [ "h0" ] ],
+    [ "pico:GND.5", "j4:J", "black", [ "h0" ] ],
+    [ "j4:J", "r2:1", "black", [ "v0" ] ],
+    [ "r2:2", "led2:C", "black", [ "v0", "h46.8", "v-48" ] ]
   ],
   "dependencies": {}
 }
