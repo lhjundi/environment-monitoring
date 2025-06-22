@@ -48,7 +48,8 @@ pico_enable_stdio_usb(environment-monitoring 1)
 target_link_libraries(environment-monitoring
         pico_stdlib
         hardware_adc
-        hardware_pwm)
+        hardware_pwm
+        hardware_watchdog)
 
 # Add the standard include files to the build
 target_include_directories(environment-monitoring PRIVATE
